@@ -1,0 +1,51 @@
+{
+  "hostname": "photon",
+  "password": {
+    "crypted": false,
+    "text": "photon"
+  },
+  "disk": "/dev/sda",
+  "partitions": [
+    {
+      "mountpoint": "/",
+      "size": 0,
+      "filesystem": "ext4",
+      "lvm": {
+        "vg_name": "vg1",
+        "lv_name": "rootfs"
+      }
+    },
+    {
+      "mountpoint": "/boot",
+      "size": 128,
+      "filesystem": "ext4"
+    },
+    {
+      "mountpoint": "/root",
+      "size": 128,
+      "filesystem": "ext4",
+      "lvm": {
+        "vg_name": "vg1",
+        "lv_name": "root"
+      }
+    },
+    {
+      "size": 128,
+      "filesystem": "swap",
+      "lvm": {
+        "vg_name": "vg2",
+        "lv_name": "swap"
+      }
+    }
+  ],
+  "packagelist_file": "packages_minimal.json",
+  "postinstall": [
+    "#!/bin/sh",
+    "sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config",
+    "systemctl restart sshd.service"
+  ],
+  "install_linux_esx": false,
+  "network": {
+    "type": "dhcp"
+  }
+}

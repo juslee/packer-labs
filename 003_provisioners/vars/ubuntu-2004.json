@@ -1,0 +1,4 @@
+{
+  "iso_file": "http://cdimages.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/ubuntu-20.04-legacy-server-amd64.iso",
+  "iso_sha1": "file:http://cdimages.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/SHA256SUMS"
+}

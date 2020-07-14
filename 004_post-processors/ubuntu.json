@@ -1,12 +1,16 @@
 {
+  "variables": {
+    "iso_file": "",
+    "iso_sha256": ""
+  },
   "builders": [
     {
       "name": "ubuntu-2004",
       "type": "virtualbox-iso",
       "guest_os_type": "ubuntu-64",
       "headless": false,
-      "iso_url": "http://cdimages.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/ubuntu-20.04-legacy-server-amd64.iso",
-      "iso_checksum": "file:http://cdimages.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/SHA256SUMS",
+      "iso_url": "{{user `iso_file`}}",
+      "iso_checksum": "{{user `iso_sha256`}}",
       "ssh_username": "ubuntu",
       "ssh_password": "ubuntu",
       "ssh_wait_timeout": "1800s",
@@ -25,6 +29,20 @@
         "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
         "initrd=/install/initrd.gz -- <enter>"
       ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "ls -al"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "compress",
+      "output": "archive.tar.lz4"
     }
   ]
 }
